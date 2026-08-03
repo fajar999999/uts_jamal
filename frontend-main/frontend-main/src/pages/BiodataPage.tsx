@@ -15,12 +15,12 @@ const BiodataPage = () => {
 
           <p>
             Nama:
-            Irfan Maulana Saputra
+            Muhammad Fajar Ramadhan 
           </p>
 
           <p>
             NIM:
-            24090107
+            24090133
           </p>
 
           <p>
