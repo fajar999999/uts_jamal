@@ -11,16 +11,19 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    login(nim, password);
+  const nimInput = nim.trim();
+  const passwordInput = password.trim();
 
-    const auth = useAuthStore.getState();
+  login(nimInput, passwordInput);
 
-    if (auth.isLogin) {
-      navigate("/dashboard");
-    }
-  };
+  const auth = useAuthStore.getState();
+
+  if (auth.isLogin) {
+    navigate("/dashboard");
+  }
+};
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-600 px-4">

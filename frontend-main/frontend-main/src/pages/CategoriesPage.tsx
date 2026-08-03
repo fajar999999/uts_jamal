@@ -49,28 +49,27 @@ const CategoriesPage = () => {
     fetchCategories();
   }, []);
 
-  const handleCreate =
-    async () => {
+  const handleCreate = async () => {
+  if (!name.trim()) {
+    alert("Nama category wajib diisi");
+    return;
+  }
 
-      try {
+  try {
+    await createCategory({
+      name: name.trim(),
+    });
 
-        await createCategory({
-          name,
-        });
+    setName("");
+    setOpenModal(false);
 
-        setName("");
+    await fetchCategories();
 
-        setOpenModal(false);
-
-        fetchCategories();
-
-      } catch (error) {
-
-        console.log(error);
-
-      }
-    };
-    
+  } catch (error) {
+    console.log(error);
+    alert("Gagal menyimpan category");
+  }
+};
 
   const handleDelete =
     async (id: number) => {
@@ -100,7 +99,7 @@ const CategoriesPage = () => {
 
     <MainLayout>
 
-      <div className="bg-white p-6 rounded-xl shadow-lg">
+      <div className="bg-white p-6 rounded-xl w-[400px]">
 
         {/* HEADER */}
 

@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-
 import prisma from "../prisma/client";
 
 export const getCategories = async (
@@ -7,33 +6,42 @@ export const getCategories = async (
   res: Response
 ) => {
   try {
-    const data =
-      await prisma.category.findMany();
+    const data = await prisma.category.findMany();
+
+    console.log("CATEGORY DATA:", data);
 
     res.json(data);
   } catch (error) {
+    console.error("ERROR PRISMA CATEGORY:", error);
+
     res.status(500).json({
-      message:
-        "Gagal mengambil category",
+      message: "Gagal mengambil category",
+      error: String(error),
     });
   }
 };
-
 export const createCategory = async (
   req: Request,
   res: Response
 ) => {
+  console.log("POST /categories MASUK");
+  console.log("BODY:", req.body);
+
   try {
-    const data =
-      await prisma.category.create({
-        data: req.body,
-      });
+    const data = await prisma.category.create({
+      data: {
+        name: req.body.name,
+      },
+    });
+
+    console.log("CATEGORY BERHASIL:", data);
 
     res.json(data);
   } catch (error) {
+    console.error("ERROR CREATE:", error);
+
     res.status(500).json({
-      message:
-        "Gagal tambah category",
+      message: "Gagal tambah category",
     });
   }
 };
@@ -45,17 +53,19 @@ export const updateCategory = async (
   try {
     const id = Number(req.params.id);
 
-    const data =
-      await prisma.category.update({
-        where: { id },
-        data: req.body,
-      });
+    const data = await prisma.category.update({
+      where: { id },
+      data: {
+        name: req.body.name,
+      },
+    });
 
     res.json(data);
   } catch (error) {
+    console.error("ERROR UPDATE:", error);
+
     res.status(500).json({
-      message:
-        "Gagal update category",
+      message: "Gagal update category",
     });
   }
 };
@@ -72,13 +82,13 @@ export const deleteCategory = async (
     });
 
     res.json({
-      message:
-        "Category berhasil dihapus",
+      message: "Category berhasil dihapus",
     });
   } catch (error) {
+    console.error("ERROR DELETE:", error);
+
     res.status(500).json({
-      message:
-        "Gagal hapus category",
+      message: "Gagal hapus category",
     });
   }
 };

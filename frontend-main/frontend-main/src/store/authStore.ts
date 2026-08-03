@@ -22,7 +22,7 @@ export const useAuthStore =
 
         login: (nim, password) => {
           if (
-            nim === "24090107" &&
+            nim === "24090133" &&
             password === "admin123"
           ) {
             set({
@@ -41,7 +41,7 @@ export const useAuthStore =
           }),
       }),
       {
-        name: "auth-storage",
+         name: "auth-storage-v2",
       }
     )
   );
