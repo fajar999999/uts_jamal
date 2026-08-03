@@ -36,7 +36,7 @@ const LoginPage = () => {
           <p className="font-semibold text-blue-700 mb-2">
           </p>
           <p>
-            NIM: <span className="font-bold">24090107</span>
+            NIM: <span className="font-bold">24090133</span>
           </p>
           <p>
             Password: <span className="font-bold">admin123</span>
