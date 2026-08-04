@@ -149,35 +149,49 @@ const EventsPage = () => {
 
   // CREATE EVENT
 
-  const handleCreate =
-    async () => {
+ const handleCreate = async () => {
+  console.log("TOMBOL SIMPAN DIKLIK");
 
-      try {
+  try {
+    console.log("DATA EVENT:", {
+      name,
+      location,
+      dateEvent,
+      description,
+      categoryId,
+      speakerId,
+    });
 
-        await createEvent({
-          name,
-          location,
-          dateEvent,
-          description,
-          categoryId,
-          speakerId,
-        });
+    const result = await createEvent({
+      name,
+      location,
+      dateEvent,
+      description,
+      categoryId,
+      speakerId,
+    });
 
-        setName("");
-        setLocation("");
-        setDateEvent("");
-        setDescription("");
+    console.log("BERHASIL:", result);
 
-        setOpenModal(false);
+    alert("Event berhasil ditambahkan!");
 
-        fetchEvents();
+    setName("");
+    setLocation("");
+    setDateEvent("");
+    setDescription("");
+    setCategoryId(0);
+    setSpeakerId(0);
 
-      } catch (error) {
+    setOpenModal(false);
 
-        console.log(error);
+    fetchEvents();
 
-      }
-    };
+  } catch (error) {
+    console.error("ERROR CREATE EVENT:", error);
+
+    alert("Gagal menambahkan event. Cek Console.");
+  }
+};
 
   // DELETE EVENT
 
